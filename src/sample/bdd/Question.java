@@ -1,4 +1,4 @@
-package sample;
+package sample.bdd;
 
 public class Question {
 
