@@ -16,21 +16,22 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.bdd.Verification;
 
-public class LoginInterface extends Stage {
-    public LoginInterface() {
-        this.setTitle("Vive l'IHM V2");
+public class EtudiantDashbord extends Stage {
+    public EtudiantDashbord(String adressMail) {
+        Verification verif = new Verification();
+        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail));
         this.setResizable(false);
         this.initStyle(StageStyle.UTILITY);
 
-        Scene laScene = new Scene(creerContenu(),250, 250);
+        Scene laScene = new Scene(creerContenu(adressMail, verif),1280, 720);
         this.setScene(laScene);
     }
 
-    Parent creerContenu() {
+    Parent creerContenu(String emailAdress, Verification verif) {
 
         VBox layout = new VBox();
 
-        Label connexion = new Label("Connexion au mini moodle");
+        Label connexion = new Label("Bonjour " +  verif.readSpecificRow("firstname", emailAdress));
         HBox box1 = new HBox();
         HBox box2 = new HBox();
         HBox box3 = new HBox();
@@ -62,47 +63,6 @@ public class LoginInterface extends Stage {
         box1.getChildren().addAll(email, email2);
         box2.getChildren().addAll(password, password2);
         box3.getChildren().addAll(ok, undo, register);
-
-        register.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("yo");
-                Stage registerWindow = new RegisterInterface();
-                registerWindow.show();
-                close();
-
-
-            }
-        });
-
-        ok.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Verification verif = new Verification();
-                if (verif.doubleUser(email2.getText())){
-                    System.out.println("compte trouvé");
-                    if (verif.readSpecificRow("password",  email2.getText()).equals(password2.getText())){
-                        System.out.println("Mdp correct");
-                        if (verif.readSpecificRow("status", email2.getText()).equals("etudiant")){
-                            Stage etudiantWindow = new EtudiantDashbord(email2.getText());
-                            etudiantWindow.show();
-                            close();
-                        }
-
-
-                    }
-                    else{
-                        System.out.println("mdp incorect");
-                    }
-                }
-                else{
-                    System.out.println("Compte introuvable");
-                }
-
-
-
-            }
-        });
 
         return layout;
     }

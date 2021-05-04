@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sample.bdd.User;
 import sample.bdd.Verification;
 
 import java.util.Collection;
@@ -49,10 +50,10 @@ public class RegisterInterface extends Stage {
 
         Label label = new Label("Your Gender: ");
         ToggleGroup group = new ToggleGroup();
-        RadioButton buttonStudent = new RadioButton("Etudiant");
+        RadioButton buttonStudent = new RadioButton("etudiant");
         buttonStudent.setToggleGroup(group);
-        buttonStudent.setSelected(true);
-        RadioButton buttonProf = new RadioButton("Enseignant");
+       // buttonStudent.setSelected(true);
+        RadioButton buttonProf = new RadioButton("enseignant");
         buttonProf.setToggleGroup(group);
 
 
@@ -74,7 +75,7 @@ public class RegisterInterface extends Stage {
 
 
         layout.getChildren().addAll(connexion, box1, box2, box3, box4, box5);
-        box1.getChildren().addAll(nom, nom2);
+        box1.getChildren().addAll(nom, nom2, prenom, prenom2);
         box2.getChildren().addAll(adressMail, adress);
         box3.getChildren().addAll(password, password2);
         box4.getChildren().addAll(label, buttonStudent, buttonProf);
@@ -105,6 +106,20 @@ public class RegisterInterface extends Stage {
                 else{
                     System.out.println("Ok");
                     System.out.println(adress.getText());
+                        if(buttonProf.isSelected()){
+
+                        }
+                        else if (buttonStudent.isSelected()){
+                            User user = new User(nom2.getText(), prenom2.getText(), adress.getText(), password2.getText(), buttonStudent.getText());
+                            user.insert();
+                            Stage etudiantWindow = new EtudiantDashbord(adress.getText());
+                            etudiantWindow.show();
+                            close();
+
+                        }
+                        else{
+                            System.out.println("Status no");
+                        }
                 }
             }
         });

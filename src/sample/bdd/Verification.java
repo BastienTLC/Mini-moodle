@@ -101,20 +101,17 @@ public class Verification {
     }
 
 
-
-
-
-
-
-
-
-    /*private  static  void  readSpecificRow(String row){
+    public String  readSpecificRow(String row, String condition){
         Connection con = DbConnection.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
+        String informationSearch = "notFind";
         try {
-            String sql = "Select " + row +" from users where email = ?";
-            ps.setString(1,);
+            String sql = "Select " + row + " from user where email = ? ";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, condition);
+            rs = ps.executeQuery();
+            informationSearch = rs.getString(1);
         }catch (SQLException e){
             System.out.println(e.toString());
         }finally {
@@ -127,8 +124,7 @@ public class Verification {
                 System.out.println(e.toString());
             }
         }
-
-
-
-    }*/
+        System.out.println("mdp :" + informationSearch);
+        return informationSearch;
+    }
 }
