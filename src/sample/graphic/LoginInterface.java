@@ -88,6 +88,11 @@ public class LoginInterface extends Stage {
                             etudiantWindow.show();
                             close();
                         }
+                        else if (verif.readSpecificRow("status", email2.getText()).equals("enseignant")){
+                            Stage enseingnantWindow = new EnseignantDashbord(email2.getText());
+                            enseingnantWindow.show();
+                            close();
+                        }
 
 
                     }

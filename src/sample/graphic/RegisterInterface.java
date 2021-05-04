@@ -107,7 +107,11 @@ public class RegisterInterface extends Stage {
                     System.out.println("Ok");
                     System.out.println(adress.getText());
                         if(buttonProf.isSelected()){
-
+                            User user = new User(nom2.getText(), prenom2.getText(), adress.getText(), password2.getText(), buttonProf.getText());
+                            user.insert();
+                            Stage enseignantWindow = new EnseignantDashbord(adress.getText());
+                            enseignantWindow.show();
+                            close();
                         }
                         else if (buttonStudent.isSelected()){
                             User user = new User(nom2.getText(), prenom2.getText(), adress.getText(), password2.getText(), buttonStudent.getText());

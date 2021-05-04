@@ -16,8 +16,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.bdd.Verification;
 
-public class EtudiantDashbord extends Stage {
-    public EtudiantDashbord(String adressMail) {
+public class EnseignantDashbord extends Stage {
+    public EnseignantDashbord(String adressMail) {
         Verification verif = new Verification();
         this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
         this.setResizable(false);
@@ -34,7 +34,7 @@ public class EtudiantDashbord extends Stage {
         Label connexion = new Label("Bonjour " +  verif.readSpecificRow("firstname", emailAdress) +" "+  verif.readSpecificRow("secondName", emailAdress));
         HBox box1 = new HBox();
         HBox box2 = new HBox();
-        box1.setStyle("-fx-background-color: #00FF00;");
+        box1.setStyle("-fx-background-color: #FF0000;");
 
 
        /* Label email = new Label("email : ");
@@ -42,10 +42,10 @@ public class EtudiantDashbord extends Stage {
         Label password = new Label("Mot de passe: ");
         PasswordField password2 = new PasswordField();*/
 
-        Button qcmJoin = new Button("Rejoindre un QCM");
-        Button note = new Button("Consulter ses notes");
+        Button qcmCreation = new Button("créer un QCM");
+        Button note = new Button("Consulter les notes");
+        Button correction = new Button("Consulter les reponses au qcm");
         Button setting = new Button("paramètre");
-        Button qcmEncour = new Button("QCM EN COUR !!");
 
 
         Insets margin = new Insets(10);
@@ -56,8 +56,8 @@ public class EtudiantDashbord extends Stage {
 
 
         layout.getChildren().addAll(connexion, box1, box2);
-        box1.getChildren().addAll(qcmJoin, note);
-        box2.getChildren().addAll(setting, qcmEncour);
+        box1.getChildren().addAll(qcmCreation, note);
+        box2.getChildren().addAll(setting, correction);
 
         return layout;
     }
