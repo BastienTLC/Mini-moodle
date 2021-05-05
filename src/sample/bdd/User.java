@@ -1,6 +1,5 @@
 package sample.bdd;
 
-import sample.bdd.DbConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

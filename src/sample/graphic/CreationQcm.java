@@ -16,8 +16,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.bdd.Verification;
 
-public class EnseignantDashbord extends Stage {
-    public EnseignantDashbord(String adressMail) {
+public class CreationQcm extends Stage {
+    public CreationQcm(String adressMail) {
         Verification verif = new Verification();
         this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
         this.setResizable(false);
@@ -31,16 +31,26 @@ public class EnseignantDashbord extends Stage {
 
         VBox layout = new VBox();
 
-        Label connexion = new Label("Bonjour " +  verif.readSpecificRow("firstname", emailAdress) +" "+  verif.readSpecificRow("secondName", emailAdress));
+
         HBox box1 = new HBox();
         HBox box2 = new HBox();
-        box1.setStyle("-fx-background-color: #FF0000;");
+        box1.setStyle("-fx-background-color: #0000ff;");
 
 
-       /* Label email = new Label("email : ");
-        TextField email2 = new TextField();
-        Label password = new Label("Mot de passe: ");
-        PasswordField password2 = new PasswordField();*/
+        Label QcmName = new Label("Nom du qcm");
+        TextField QcmNamefield = new TextField();
+        Label publicatonQcm = new Label("Date publication QCM");
+        TextField publicatonQcmField = new TextField();
+        Label classOwner = new Label("Selectionner des classes");
+        TextField classOwnerFiel = new TextField();
+        Label groupOwner = new Label("Selectionner des groupes");
+        TextField groupOwnerFiel = new TextField();
+        Label nb_question = new Label("Selectionner le nombre de question");
+        TextField nb_questionField = new TextField();
+        Label qcmDuration = new Label("Selectionner le temps du qcm");
+        TextField qcmDurationField = new TextField();
+        Label qcmCoef = new Label("Selectionner un coeficient pour ce qcm");
+        TextField qcmCoefField = new TextField();
 
         Button qcmCreation = new Button("créer un QCM");
         Button note = new Button("Consulter les notes");
@@ -50,23 +60,13 @@ public class EnseignantDashbord extends Stage {
 
         Insets margin = new Insets(10);
 
-        connexion.setPadding(margin);
         box1.setPadding(margin);
         box2.setPadding(margin);
 
 
-        layout.getChildren().addAll(connexion, box1, box2);
-        box1.getChildren().addAll(qcmCreation, note);
-        box2.getChildren().addAll(setting, correction);
-
-        qcmCreation.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Stage qcmCreationWindow = new CreationQcm(emailAdress);
-                qcmCreationWindow.show();
-                close();
-            }
-        });
+        layout.getChildren().addAll(box1, box2);
+        box1.getChildren().addAll(QcmName,publicatonQcm,classOwner,groupOwner,nb_question,qcmDuration,qcmCoef);
+        box2.getChildren().addAll(QcmNamefield,publicatonQcmField,classOwnerFiel,groupOwnerFiel,nb_questionField,qcmDurationField,qcmCoefField);
 
         return layout;
     }
