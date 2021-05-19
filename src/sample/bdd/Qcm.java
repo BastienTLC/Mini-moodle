@@ -62,6 +62,12 @@ public class Qcm {
         System.out.println(base64Encoder.encodeToString(randomBytes));
         return base64Encoder.encodeToString(randomBytes);
     }
+    public String getTokken(){
+        return qcm_id;
+    }
+    public String getName(){
+        return qcm_name;
+    }
 
 
 }

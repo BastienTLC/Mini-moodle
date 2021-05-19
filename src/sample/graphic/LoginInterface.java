@@ -18,9 +18,9 @@ import sample.bdd.Verification;
 
 public class LoginInterface extends Stage {
     public LoginInterface() {
-        this.setTitle("giroud ntm");
+        this.setTitle("Vive l'IHM V2");
         this.setResizable(false);
-        this.initStyle(StageStyle.DECORATED);
+        this.initStyle(StageStyle.UTILITY);
 
         Scene laScene = new Scene(creerContenu(),250, 250);
         this.setScene(laScene);
