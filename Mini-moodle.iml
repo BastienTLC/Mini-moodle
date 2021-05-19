@@ -10,13 +10,15 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/postgresql-42.2.20.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.5.8.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.5.8.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.34.0.jar!/" />
@@ -25,5 +27,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="sqlite-jdbc-3.34.0" level="project" />
   </component>
 </module>

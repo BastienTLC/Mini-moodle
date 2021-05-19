@@ -1,8 +1,7 @@
 package sample.bdd;
 
-import java.sql.DriverManager;
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.DriverManager;
 
 
 public class DbConnection {
@@ -11,7 +10,7 @@ public class DbConnection {
 		Connection connection = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
-			connection=DriverManager.getConnection("jdbc:sqlite:MiniMoodleBdd.db");
+			connection=DriverManager.getConnection("jdbc:sqlite:C:\\Users\\BastienP\\Desktop\\Mini-moodle\\MiniMoodleBdd.db");
 			System.out.println("SQLite DB connected");
 		}catch(Exception e) {
 			System.out.println(e);
