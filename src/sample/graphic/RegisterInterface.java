@@ -2,7 +2,9 @@ package sample.graphic;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,6 +14,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.bdd.User;
 import sample.bdd.Verification;
+
+import java.util.Collection;
+
 public class RegisterInterface extends Stage {
     public RegisterInterface() {
         this.setTitle("Vive l'IHM V2");
