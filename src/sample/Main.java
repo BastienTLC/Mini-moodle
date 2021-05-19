@@ -26,10 +26,7 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         launch(args);
-        /*java.util.Date now = new java.util.Date();
-        java.sql.Date sqlDate = new java.sql.Date(now.getTime());
-        Qcm qcm = new Qcm(sqlDate,"201","h2", 20,3600, 3.5);
-        qcm.insert();*/
+
     }
 
 }
