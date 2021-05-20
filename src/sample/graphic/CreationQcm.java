@@ -22,7 +22,7 @@ import java.awt.*;
 public class CreationQcm extends Stage {
     public CreationQcm(String adressMail) {
         Verification verif = new Verification();
-        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
+        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname","user","email", adressMail) +" "+  verif.readSpecificRow("secondName","user","email", adressMail));
         this.setResizable(false);
         this.initStyle(StageStyle.UTILITY);
 
@@ -66,7 +66,7 @@ public class CreationQcm extends Stage {
         ajoutQuestion.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Stage creationQuestion = new CreationQuestion(emailAdress, qcm.getTokken(), qcm.getName());
+                Stage creationQuestion = new CreationQuestion(emailAdress, qcm.getTokken(), qcm.getName(), qcm.getNbquestion());
                 creationQuestion.show();
                 close();
             }

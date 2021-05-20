@@ -12,14 +12,14 @@ import java.sql.Date;
 
 public abstract class Question {
 
-    public String question_id;
+    public String qcm_id;
     public int question_num;
     public String question_en;
     public String question_rep;
 
 
-    public Question(String question_id, int question_num, String question_en) {
-        this.question_id = question_id;
+    public Question(String qcm_id, int question_num, String question_en) {
+        this.qcm_id = qcm_id;
         this .question_num = question_num;
         this.question_en = question_en;
     }
@@ -28,6 +28,4 @@ public abstract class Question {
     public int getQuestionNum(){
         return question_num;
     }
-
-
 }

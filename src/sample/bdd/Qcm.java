@@ -68,6 +68,7 @@ public class Qcm {
     public String getName(){
         return qcm_name;
     }
+    public int getNbquestion(){ return nb_question;}
 
 
 }

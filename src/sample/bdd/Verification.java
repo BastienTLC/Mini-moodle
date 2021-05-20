@@ -43,13 +43,13 @@ public class Verification {
 
 
 
-    public void readSpeData(String data){
+    public void readSpeData(String data, String test){
         Connection con = DbConnection.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
-            String sql = "SELECT " + data  + " FROM user";
+            String sql = "SELECT " + data  + " FROM question";
             ps=con.prepareStatement(sql);
             rs= ps.executeQuery();
             while(rs.next()){
@@ -101,7 +101,35 @@ public class Verification {
     }
 
 
-    public String  readSpecificRow(String row, String condition){
+    public String  readSpecificRow(String row,String table,String rowCondition, String condition){
+        Connection con = DbConnection.connect();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String informationSearch = "notFind";
+        try {
+            String sql = "Select " + row + " from "+ table +" where " + rowCondition + " = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, condition);
+            rs = ps.executeQuery();
+            informationSearch = rs.getString(1);
+        }catch (SQLException e){
+            System.out.println(e.toString());
+        }finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+
+            }catch(SQLException e){
+                System.out.println(e.toString());
+            }
+        }
+        System.out.println("mdp :" + informationSearch);
+        return informationSearch;
+    }
+
+
+    /*public String  allQcmQuestion(String row, String condition){
         Connection con = DbConnection.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -126,5 +154,10 @@ public class Verification {
         }
         System.out.println("mdp :" + informationSearch);
         return informationSearch;
-    }
+    }*/
+
+
+
+
+
 }

@@ -19,7 +19,7 @@ import sample.bdd.Verification;
 public class EnseignantDashbord extends Stage {
     public EnseignantDashbord(String adressMail) {
         Verification verif = new Verification();
-        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
+        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname","user","email", adressMail) +" "+  verif.readSpecificRow("secondName","user","email", adressMail));
         this.setResizable(false);
         this.initStyle(StageStyle.UTILITY);
 
@@ -31,7 +31,7 @@ public class EnseignantDashbord extends Stage {
 
         VBox layout = new VBox();
 
-        Label connexion = new Label("Bonjour " +  verif.readSpecificRow("firstname", emailAdress) +" "+  verif.readSpecificRow("secondName", emailAdress));
+        Label connexion = new Label("Bonjour " +  verif.readSpecificRow("firstname","user","email", emailAdress) +" "+  verif.readSpecificRow("secondName","email","user", emailAdress));
         HBox box1 = new HBox();
         HBox box2 = new HBox();
         box1.setStyle("-fx-background-color: #FF0000;");
