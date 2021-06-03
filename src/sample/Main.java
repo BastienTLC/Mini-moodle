@@ -1,21 +1,8 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import sample.bdd.Qcm;
 import sample.graphic.CreationQcm;
-import sample.graphic.LoginInterface;
-
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Main extends Application {
 
@@ -23,6 +10,14 @@ public class Main extends Application {
         primaryStage = new CreationQcm("bastien@gmail.com");
         primaryStage.show();
     }
+
+    /*public void start(Stage stage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Scene scene = new Scene(root);
+
+        stage.show();
+
+    }*/
 
     public static void main(String[] args) {
 

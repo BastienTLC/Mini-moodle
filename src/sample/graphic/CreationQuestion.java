@@ -2,24 +2,17 @@ package sample.graphic;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sample.bdd.Question;
 import sample.bdd.QuestionLibre;
 import sample.bdd.QuestionTF;
 import sample.bdd.Verification;
-
-import java.awt.*;
 
 public class CreationQuestion extends Stage {
     public CreationQuestion(String adressMail, String qcmToken, String qcmName, int nombreQuestion) {
@@ -50,9 +43,12 @@ public class CreationQuestion extends Stage {
         Label reponse = new Label("Date publication QCM");
         TextField reponseFiel = new TextField();
 
+        Label NumeroQuestion = new Label("INFORMATION");
+
         Button newquestion = new Button("Ajouter et passer a la question suivante");
         Button previousquestion = new Button("retourner a la question précedente");
         Button edit = new Button("edit");
+        Button delete = new Button("supprimer");
 
         ComboBox comboBox = new ComboBox();
 
@@ -69,11 +65,6 @@ public class CreationQuestion extends Stage {
                 }
                 else{
                     System.out.println("decouché");
-
-
-
-
-
                     comboBox.getItems().add("Vrai");
                     comboBox.getItems().add("Faux");
                     comboBox.getItems().add("Aucune");
@@ -100,6 +91,7 @@ public class CreationQuestion extends Stage {
                         questiontf.insert();
                     }
                     nombre[0] = nombre[0] + 1;
+                    NumeroQuestion.setText( "information QCM " + "\n" +verif.readAllDatatest("question", "*", "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString()));
                     System.out.println(nombre[0]);
                     informationQuestion.setText("Question numero :" + nombre[0]);
                 }
@@ -110,12 +102,25 @@ public class CreationQuestion extends Stage {
             @Override
             public void handle(ActionEvent event) {
                 if (nombre[0] > 0){
-                    box2.getChildren().setAll(previousquestion,ennonceField,comboBox, newquestion, edit);
-                    //System.out.println(verif.readSpecificRow("numeroQuestion","question","qcm_id", qcmToken));
-                    verif.readSpeData("qcm_id", qcmToken);
+                    nombre[0] = nombre[0] - 1;
+                    informationQuestion.setText("Question numero :" + nombre[0]);
+                    //Label questionInfo = new Label(verif.readAllDatatest());
+                    String test = verif.readSpecificRowtest();
+                    NumeroQuestion.setText( "information QCM " + "\n" +verif.readAllDatatest("question", "*", "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString()));
+                    box2.getChildren().setAll(previousquestion,ennonceField,comboBox, newquestion, edit, NumeroQuestion);
+
                 }
-                nombre[0] = nombre[0] - 1;
-                informationQuestion.setText("Question numero :" + nombre[0]);
+            }
+        });
+
+        edit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+
+                verif.updateRow("question", "question", ennonceField.getPromptText(), "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString());
+                verif.updateRow("question", "question", reponse.getText(), "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString());
+                NumeroQuestion.setText( "information QCM " + "\n" +verif.readAllDatatest("question", "*", "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString()));
             }
         });
 
@@ -126,7 +131,7 @@ public class CreationQuestion extends Stage {
         box1.setPadding(margin);
         box2.setPadding(margin);
 
-        box1.getChildren().addAll(informationQuestion);
+        box1.getChildren().addAll(informationQuestion, NumeroQuestion);
         layout.getChildren().addAll(box1, box2, cb);
 
 

@@ -1,7 +1,5 @@
 package sample.bdd;
 
-import org.sqlite.core.DB;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -107,13 +105,13 @@ public class Verification {
         ResultSet rs = null;
         String informationSearch = "notFind";
         try {
-            String sql = "Select " + row + " from "+ table +" where " + rowCondition + " = ?";
+            String sql = "Select " + "*" + " from "+ table +" where " + rowCondition + " = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, condition);
             rs = ps.executeQuery();
-            informationSearch = rs.getString(1);
+            informationSearch = rs.getString(1) + rs.getString(2) + rs.getString(3) + rs.getString(4);
         }catch (SQLException e){
-            System.out.println(e.toString());
+            System.out.println(e.toString() + "Q");
         }finally {
             try {
                 rs.close();
@@ -124,24 +122,40 @@ public class Verification {
                 System.out.println(e.toString());
             }
         }
-        System.out.println("mdp :" + informationSearch);
         return informationSearch;
     }
 
+    public void updateRow(String table, String editRow, String editValue, String rowCondition,String rowCondition2, String rowConditionValue, String rowConditionValue2){
+        Connection con = DbConnection.connect();
+        PreparedStatement ps = null;
+        try{
+            String sql = "UPDATE "+ table + " set "+ editRow +" = ? where "+ rowCondition +"  = ? and " + rowCondition2 + " = ?";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, editValue);
+            ps.setString(2, rowConditionValue);
+            ps.setString(3, rowConditionValue2);
+            ps.execute();
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+    }
 
-    /*public String  allQcmQuestion(String row, String condition){
+
+    public String  readSpecificRowtest(/*String table, String row, String rowCondition,String rowCondition2, String rowConditionValue, String rowConditionValue2*/){
         Connection con = DbConnection.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
         String informationSearch = "notFind";
         try {
-            String sql = "Select " + row + " from user where email = ? ";
+            String sql = "select * from question where numeroQuestion = 1";
+            //String sql = "select "+ row + " from "+ table +" where "+ rowCondition +"  = ? and " + rowCondition2 + " = ?";
             ps = con.prepareStatement(sql);
-            ps.setString(1, condition);
+            //ps.setString(1, rowConditionValue);
+            //ps.setString(2, rowConditionValue2);
             rs = ps.executeQuery();
-            informationSearch = rs.getString(1);
+            informationSearch = rs.getString(1) + rs.getString(2) + rs.getString(3) + rs.getString(4);
         }catch (SQLException e){
-            System.out.println(e.toString());
+            System.out.println(e.toString() + "Q");
         }finally {
             try {
                 rs.close();
@@ -152,12 +166,50 @@ public class Verification {
                 System.out.println(e.toString());
             }
         }
-        System.out.println("mdp :" + informationSearch);
         return informationSearch;
-    }*/
+    }
 
 
+    public String readAllDatatest(String table, String row, String rowCondition,String rowCondition2, String rowConditionValue, String rowConditionValue2){
+        String information = "";
+        Connection con = DbConnection.connect();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            //String sql = "select * from question where numeroQuestion = 1 and reponse = 4";
+            String sql = "select "+ row + " from "+ table +" where "+ rowCondition +"  = ? and " + rowCondition2 + " = ?";
+            ps=con.prepareStatement(sql);
+            ps.setString(1, rowConditionValue);
+            ps.setString(2, rowConditionValue2);
+            rs= ps.executeQuery();
+            while(rs.next()){
+                String qcm_id = rs.getString("qcm_id");
+                String numeoroQuestion = rs.getString("numeroQuestion");
+                String question = rs.getString("question");
+                String reponse = rs.getString("reponse");
+
+                information = "qcm_id " + qcm_id +"\n"+ "numeorQuestion" + numeoroQuestion + "\n" + "question" + question + "\n" + "reponse" + reponse;
 
 
+                System.out.println("qcm_id " + qcm_id);
+                System.out.println("numeorQuestion" + numeoroQuestion);
+                System.out.println("question" + question);
+                System.out.println("reponse" + reponse);
+            }
+        }catch (SQLException e){
+            System.out.println(e.toString());
+        }finally {
+            try {
+                rs.close();;
+                ps.close();
+                con.close();
+            }catch(SQLException e){
+                System.out.println(e.toString());
+            }
+        }
+
+        return information;
+    }
 
 }
