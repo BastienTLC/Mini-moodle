@@ -3,12 +3,10 @@ package sample.bdd;
 
 import java.security.SecureRandom;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.Base64;
-import java.sql.Date;
 
 public class Qcm {
 
@@ -37,7 +35,7 @@ public class Qcm {
         Connection connection = DbConnection.connect();
         PreparedStatement ps = null;
         try {
-            String sql = "INSERT INTO qcm(qcm_id,qcm_name, qcm_date,qcm_time ,class_owner, group_owner, nb_question, Temps, coef) VALUES(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO qcm(qcm_id,qcm_name, qcm_date,class_owner ,group_owner, nb_question, Temps, coef) VALUES(?,?,?,?,?,?,?,?)";
             ps = connection.prepareStatement(sql);
             ps.setString(1,  this.qcm_id);
             ps.setString(2, this.qcm_name);
@@ -48,6 +46,7 @@ public class Qcm {
             ps.setInt(7, this.Temps);
             ps.setDouble(8, this.coef);
             ps.execute();
+            System.out.println("ok");
         }catch(SQLException e) {
             System.out.println(e.toString());
         }

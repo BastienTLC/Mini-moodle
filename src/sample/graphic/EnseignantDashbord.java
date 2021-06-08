@@ -2,14 +2,11 @@ package sample.graphic;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -19,7 +16,7 @@ import sample.bdd.Verification;
 public class EnseignantDashbord extends Stage {
     public EnseignantDashbord(String adressMail) {
         Verification verif = new Verification();
-        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname","user","email", adressMail) +" "+  verif.readSpecificRow("secondName","user","email", adressMail));
+        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
         this.setResizable(false);
         this.initStyle(StageStyle.UTILITY);
 
@@ -31,7 +28,7 @@ public class EnseignantDashbord extends Stage {
 
         VBox layout = new VBox();
 
-        Label connexion = new Label("Bonjour " +  verif.readSpecificRow("firstname","user","email", emailAdress) +" "+  verif.readSpecificRow("secondName","email","user", emailAdress));
+        Label connexion = new Label("Bonjour " +  verif.readSpecificRow("firstname", emailAdress) +" "+  verif.readSpecificRow("secondName", emailAdress));
         HBox box1 = new HBox();
         HBox box2 = new HBox();
         box1.setStyle("-fx-background-color: #FF0000;");

@@ -2,7 +2,6 @@ package sample.graphic;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -81,14 +80,15 @@ public class LoginInterface extends Stage {
                 Verification verif = new Verification();
                 if (verif.doubleUser(email2.getText())){
                     System.out.println("compte trouvé");
-                    if (verif.readSpecificRow("password","user","email",  email2.getText()).equals(password2.getText())){
+                    if (verif.readSpecificRow("password",  email2.getText()).equals(password2.getText())){
                         System.out.println("Mdp correct");
-                        if (verif.readSpecificRow("status","user","email", email2.getText()).equals("etudiant")){
+                        if (verif.readSpecificRow("status", email2.getText()).equals("etudiant")){
+                            System.out.println("open");
                             Stage etudiantWindow = new EtudiantDashbord(email2.getText());
                             etudiantWindow.show();
                             close();
                         }
-                        else if (verif.readSpecificRow("status","user","email", email2.getText()).equals("enseignant")){
+                        else if (verif.readSpecificRow("status", email2.getText()).equals("enseignant")){
                             Stage enseingnantWindow = new EnseignantDashbord(email2.getText());
                             enseingnantWindow.show();
                             close();

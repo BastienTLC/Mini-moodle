@@ -99,17 +99,18 @@ public class Verification {
     }
 
 
-    public String  readSpecificRow(String row,String table,String rowCondition, String condition){
+    /*public String  readSpecificRow(String row,String table,String rowCondition, String condition){
         Connection con = DbConnection.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
         String informationSearch = "notFind";
         try {
             String sql = "Select " + "*" + " from "+ table +" where " + rowCondition + " = ?";
+            // sql = "Select " + row + " from user where email = ? ";
             ps = con.prepareStatement(sql);
             ps.setString(1, condition);
             rs = ps.executeQuery();
-            informationSearch = rs.getString(1) + rs.getString(2) + rs.getString(3) + rs.getString(4);
+            informationSearch = rs.getString(1);// + rs.getString(2) + rs.getString(3) + rs.getString(4);
         }catch (SQLException e){
             System.out.println(e.toString() + "Q");
         }finally {
@@ -122,8 +123,40 @@ public class Verification {
                 System.out.println(e.toString());
             }
         }
+        System.out.println("mdp :" + informationSearch);
+        return informationSearch;
+    }*/
+
+    public String  readSpecificRow(String row, String condition){
+        Connection con = DbConnection.connect();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String informationSearch = "notFind";
+        try {
+            String sql = "Select " + row + " from user where email = ? ";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, condition);
+            rs = ps.executeQuery();
+            informationSearch = rs.getString(1);
+        }catch (SQLException e){
+            System.out.println(e.toString());
+        }finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+
+            }catch(SQLException e){
+                System.out.println(e.toString());
+            }
+        }
+        System.out.println("mdp :" + informationSearch);
         return informationSearch;
     }
+
+
+
+
 
     public void updateRow(String table, String editRow, String editValue, String rowCondition,String rowCondition2, String rowConditionValue, String rowConditionValue2){
         Connection con = DbConnection.connect();
@@ -188,14 +221,16 @@ public class Verification {
                 String numeoroQuestion = rs.getString("numeroQuestion");
                 String question = rs.getString("question");
                 String reponse = rs.getString("reponse");
+                String typeQuestion = rs.getString("typeQuestion");
 
-                information = "qcm_id " + qcm_id +"\n"+ "numeorQuestion" + numeoroQuestion + "\n" + "question" + question + "\n" + "reponse" + reponse;
+                information = qcm_id +"\n"+ numeoroQuestion + "\n" + question + "\n" + reponse + "\n" + typeQuestion;
 
 
                 System.out.println("qcm_id " + qcm_id);
-                System.out.println("numeorQuestion" + numeoroQuestion);
-                System.out.println("question" + question);
-                System.out.println("reponse" + reponse);
+                System.out.println("numeorQuestion " + numeoroQuestion);
+                System.out.println("question " + question);
+                System.out.println("reponse " + reponse);
+                System.out.println("typeQuestion " + typeQuestion);
             }
         }catch (SQLException e){
             System.out.println(e.toString());

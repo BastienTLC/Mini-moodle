@@ -18,8 +18,8 @@ import sample.bdd.Verification;
 
 import java.time.LocalDate;
 
-public class CreationQcm extends Stage {
-    public CreationQcm(String adressMail) {
+public class QcmJoin extends Stage {
+    public QcmJoin(String adressMail) {
         Verification verif = new Verification();
         this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
         this.setResizable(false);

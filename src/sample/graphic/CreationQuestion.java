@@ -17,7 +17,7 @@ import sample.bdd.Verification;
 public class CreationQuestion extends Stage {
     public CreationQuestion(String adressMail, String qcmToken, String qcmName, int nombreQuestion) {
         Verification verif = new Verification();
-        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname","user","email", adressMail) +" "+  verif.readSpecificRow("secondName","user","email", adressMail));
+        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
         this.setResizable(false);
         this.initStyle(StageStyle.UTILITY);
 
@@ -50,17 +50,33 @@ public class CreationQuestion extends Stage {
         Button edit = new Button("edit");
         Button delete = new Button("supprimer");
 
+        Button terminer = new Button("Terminer");
+
         ComboBox comboBox = new ComboBox();
 
         cb.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                String questionDebug = verif.readAllDatatest("question", "*", "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString());
+                String questionTabDebug[] = questionDebug.split("\\n");
                 if (cb.isSelected() == true){
                     System.out.println("coché");
-
-
                     box1.getChildren().setAll(ennonce,reponse, informationQuestion);
                     box2.getChildren().setAll(previousquestion,ennonceField,reponseFiel, newquestion);
+
+                }
+                else if (cb.isSelected() == true && questionTabDebug[3] != ""){
+                    if (questionTabDebug[3] == "libre"){
+                        box1.getChildren().setAll(ennonce,reponse, informationQuestion);
+                        box2.getChildren().setAll(previousquestion,ennonceField,reponseFiel, newquestion);
+                    }
+                    else{
+                        comboBox.getItems().add("Vrai");
+                        comboBox.getItems().add("Faux");
+                        comboBox.getItems().add("Aucune");
+                        box1.getChildren().setAll(ennonce, reponse, informationQuestion);
+                        box2.getChildren().setAll(previousquestion,ennonceField,comboBox, newquestion);
+                    }
 
                 }
                 else{
@@ -78,7 +94,7 @@ public class CreationQuestion extends Stage {
             @Override
             public void handle(ActionEvent event) {
 
-                //if (nombre[0] < nombreQuestion){
+                if (nombre[0] < nombreQuestion){
                     if (cb.isSelected() == true){
                         QuestionLibre questionLibre = new QuestionLibre(qcmToken, nombre[0], ennonceField.getText(), reponseFiel.getText());
                         System.out.println(questionLibre);
@@ -95,19 +111,33 @@ public class CreationQuestion extends Stage {
                     System.out.println(nombre[0]);
                     informationQuestion.setText("Question numero :" + nombre[0]);
                 }
-                //}
+                else{
+                    box1.getChildren().add(terminer);
+                }
+                }
+
         });
 
         previousquestion.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                String questionDebug;
+                String questionTabDebug[];
                 if (nombre[0] > 0){
                     nombre[0] = nombre[0] - 1;
                     informationQuestion.setText("Question numero :" + nombre[0]);
                     //Label questionInfo = new Label(verif.readAllDatatest());
-                    String test = verif.readSpecificRowtest();
-                    NumeroQuestion.setText( "information QCM " + "\n" +verif.readAllDatatest("question", "*", "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString()));
-                    box2.getChildren().setAll(previousquestion,ennonceField,comboBox, newquestion, edit, NumeroQuestion);
+                    //String test = verif.readSpecificRowtest();
+                    questionDebug = verif.readAllDatatest("question", "*", "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString());
+                    NumeroQuestion.setText( "information QCM " + "\n" + questionDebug);
+                    questionTabDebug = questionDebug.split("\\n");
+
+                    for(String w:questionTabDebug){
+                        System.out.println(w);
+                    }
+                    ennonceField.setText(String.valueOf(questionTabDebug[2]));
+                    box2.getChildren().setAll(previousquestion,ennonceField,reponseFiel,comboBox, newquestion, edit, NumeroQuestion);
+
 
                 }
             }
@@ -121,6 +151,15 @@ public class CreationQuestion extends Stage {
                 verif.updateRow("question", "question", ennonceField.getPromptText(), "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString());
                 verif.updateRow("question", "question", reponse.getText(), "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString());
                 NumeroQuestion.setText( "information QCM " + "\n" +verif.readAllDatatest("question", "*", "qcm_id", "numeroQuestion", qcmToken, nombre[0].toString()));
+            }
+        });
+
+        terminer.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage qcmCreationWindow = new CreationQcm(emailAdress);
+                qcmCreationWindow.show();
+                close();
             }
         });
 
