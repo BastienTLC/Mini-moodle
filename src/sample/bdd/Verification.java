@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Verification {
     public void readAllData(){
@@ -41,19 +43,21 @@ public class Verification {
 
 
 
-    public void readSpeData(String data, String test){
+    public ArrayList<String> readSpeData(String data, String table){
+        ArrayList<String> liste = new ArrayList<String>();
         Connection con = DbConnection.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
-            String sql = "SELECT " + data  + " FROM question";
+            String sql = "SELECT " + data  + " FROM "+ table;
             ps=con.prepareStatement(sql);
             rs= ps.executeQuery();
             while(rs.next()){
                 String dataContain = rs.getString(data);
 
                 System.out.println(data + " " +  dataContain);
+                liste.add(dataContain);
             }
         }catch (SQLException e){
             System.out.println(e.toString());
@@ -66,7 +70,49 @@ public class Verification {
                 System.out.println(e.toString());
             }
         }
+        return liste;
     }
+
+
+
+    public ArrayList<String> readQcmGroup(String smallGroup, String normalGroup){
+        ArrayList<String> liste = new ArrayList<String>();
+        Connection con = DbConnection.connect();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT qcm_name, qcm_date, qcm_id, nb_question FROM qcm where group_owner = ?";
+            ps=con.prepareStatement(sql);
+            ps.setString(1, smallGroup);
+            //ps.setString(2, normalGroup);
+            rs= ps.executeQuery();
+            while(rs.next()){
+                String dataContain = rs.getString("qcm_name");
+                Date dateData = rs.getDate("qcm_date");
+                String qcm_id = rs.getString("qcm_id");
+                String nb_question = rs.getString("nb_question");
+
+               // System.out.println(  dataContain);
+                liste.add(dataContain + "\n" + dateData.toString() + "\n" + qcm_id.toString()+ "\n" + nb_question.toString());
+            }
+        }catch (SQLException e){
+            System.out.println(e.toString());
+        }finally {
+            try {
+                rs.close();
+                ps.close();
+                con.close();
+            }catch(SQLException e){
+                System.out.println(e.toString());
+            }
+        }
+        return liste;
+    }
+
+
+
+
 
     public boolean doubleUser(String emailAdress){
         Connection con = DbConnection.connect();

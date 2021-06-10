@@ -5,10 +5,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -32,6 +29,7 @@ public class CreationQcm extends Stage {
     Parent creerContenu(String emailAdress, Verification verif) {
 
         VBox layout = new VBox();
+        Verification verification = new Verification();
 
 
         HBox box1 = new HBox();
@@ -44,10 +42,11 @@ public class CreationQcm extends Stage {
         TextField QcmNamefield = new TextField();
         Label publicatonQcm = new Label("Date publication QCM");
         DatePicker publicatonQcmField = new DatePicker();
-        Label classOwner = new Label("Selectionner des classes");
-        TextField classOwnerFiel = new TextField();
-        Label groupOwner = new Label("Selectionner des groupes");
-        TextField groupOwnerFiel = new TextField();
+        ComboBox comboBox2 = new ComboBox();
+        comboBox2.getItems().addAll(verification.readSpeData("nomGroupe", "groupe"));
+
+        ComboBox comboBox = new ComboBox();
+        comboBox.getItems().addAll(verification.readSpeData("nomDemi", "groupe"));
         Label nb_question = new Label("Selectionner le nombre de question");
         TextField nb_questionField = new TextField();
         Label qcmDuration = new Label("Selectionner le temps du qcm");
@@ -68,7 +67,7 @@ public class CreationQcm extends Stage {
         ajoutQuestion.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Qcm qcm = new Qcm(QcmNamefield.getText(),sqlDate,classOwner.getText(),groupOwner.getText(),Integer.parseInt(nb_questionField.getText()),Integer.parseInt(qcmDurationField.getText()), Double.parseDouble(qcmCoefField.getText()));
+                Qcm qcm = new Qcm(QcmNamefield.getText(),sqlDate,comboBox2.getValue().toString(),comboBox.getValue().toString(),Integer.parseInt(nb_questionField.getText()),Integer.parseInt(qcmDurationField.getText()), Double.parseDouble(qcmCoefField.getText()));
                 qcm.insert();
                 Stage creationQuestion = new CreationQuestion(emailAdress, qcm.getTokken(), qcm.getName(), qcm.getNbquestion());
                 creationQuestion.show();
@@ -85,8 +84,8 @@ public class CreationQcm extends Stage {
 
 
         layout.getChildren().addAll(box1, box2, box3);
-        box1.getChildren().addAll(QcmName,publicatonQcm,classOwner,groupOwner,nb_question,qcmDuration,qcmCoef);
-        box2.getChildren().addAll(QcmNamefield,publicatonQcmField,classOwnerFiel,groupOwnerFiel,nb_questionField,qcmDurationField,qcmCoefField);
+        box1.getChildren().addAll(QcmName,publicatonQcm,nb_question,qcmDuration,qcmCoef);
+        box2.getChildren().addAll(QcmNamefield,publicatonQcmField,comboBox2,comboBox,nb_questionField,qcmDurationField,qcmCoefField);
         box3.getChildren().addAll(ajoutQuestion, undo);
 
         return layout;

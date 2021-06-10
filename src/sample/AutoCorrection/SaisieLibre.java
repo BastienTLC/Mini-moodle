@@ -1,45 +1,28 @@
 package sample.AutoCorrection;
 
-import java.util.ArrayList;
 
 
 
 public class SaisieLibre {
     private String SaisieUtilisateur;
-    private ArrayList<String> listeReponse;
+    private String Reponse;
 
-    public SaisieLibre(String SaisieUtilisateur, ArrayList<String> listeReponse){
+    public SaisieLibre(String SaisieUtilisateur, String Reponse){
         this.SaisieUtilisateur = SaisieUtilisateur;
-        this.listeReponse = listeReponse;
+        this.Reponse = Reponse;
     }
 
     public boolean isRight(){
-        boolean isright = false;
-        // est contenu dans le tableau
-        if (listeReponse.contains(SaisieUtilisateur)){
-            isright = true;
+        boolean isTheSame = false;
+
+        if(SaisieUtilisateur.equalsIgnoreCase(Reponse)){
+            isTheSame = true;
         }
-        else
-        {
-            isright = false;
-        }
-        // chaine correct contient les maj au mauvaise endroit
-        for(String s : listeReponse) {
-            if (s.equalsIgnoreCase(SaisieUtilisateur)){
-                isright=true;
-            }
-        }
-        // Manque des caractères
-
-        isright = manqueChar();
-
-
-
-        return  isright;
+        return  isTheSame;
     }
 
 
-    public boolean manqueChar(){
+    /*public boolean manqueChar(){
         boolean isright = false;
         for(String s : listeReponse) {
             int nombreFauteMot = 0;
@@ -68,6 +51,6 @@ public class SaisieLibre {
             }
         }
         return  isright;
-    }
+    }*/
 
 }

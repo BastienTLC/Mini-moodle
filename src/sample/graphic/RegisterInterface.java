@@ -2,9 +2,7 @@ package sample.graphic;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,15 +13,13 @@ import javafx.stage.StageStyle;
 import sample.bdd.User;
 import sample.bdd.Verification;
 
-import java.util.Collection;
-
 public class RegisterInterface extends Stage {
     public RegisterInterface() {
         this.setTitle("Vive l'IHM V2");
         this.setResizable(false);
         this.initStyle(StageStyle.UTILITY);
 
-        Scene registerScene = new Scene(creerContenu(),250, 250);
+        Scene registerScene = new Scene(creerContenu(),300, 300);
         this.setScene(registerScene);
     }
 
@@ -37,6 +33,8 @@ public class RegisterInterface extends Stage {
         HBox box3 = new HBox();
         HBox box4 = new HBox();
         HBox box5 = new HBox();
+        HBox box6 = new HBox();
+        HBox box7 = new HBox();
 
 
         Label nom = new Label("Nom : ");
@@ -48,7 +46,7 @@ public class RegisterInterface extends Stage {
         Label password = new Label("Mot de passe: ");
         PasswordField password2 = new PasswordField();
 
-        Label label = new Label("Your Gender: ");
+        Label label = new Label("Votre statu");
         ToggleGroup group = new ToggleGroup();
         RadioButton buttonStudent = new RadioButton("etudiant");
         buttonStudent.setToggleGroup(group);
@@ -56,6 +54,7 @@ public class RegisterInterface extends Stage {
         RadioButton buttonProf = new RadioButton("enseignant");
         buttonProf.setToggleGroup(group);
 
+        ComboBox comboBox = new ComboBox();
 
         Button undo = new Button("Annuler");
         Button ok = new Button("Ok");
@@ -74,12 +73,23 @@ public class RegisterInterface extends Stage {
         box3.setPadding(margin);
 
 
-        layout.getChildren().addAll(connexion, box1, box2, box3, box4, box5);
-        box1.getChildren().addAll(nom, nom2, prenom, prenom2);
-        box2.getChildren().addAll(adressMail, adress);
-        box3.getChildren().addAll(password, password2);
-        box4.getChildren().addAll(label, buttonStudent, buttonProf);
-        box5.getChildren().addAll(ok, undo, login);
+        layout.getChildren().addAll(connexion, box1, box2, box3, box4, box5, box6, box7);
+        box1.getChildren().addAll(nom, nom2);
+        box2.getChildren().addAll(prenom, prenom2);
+        box3.getChildren().addAll(adressMail, adress);
+        box4.getChildren().addAll(password, password2);
+        box5.getChildren().addAll(label, buttonStudent, buttonProf);
+        box7.getChildren().addAll(login, ok, undo);
+
+        buttonStudent.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                Verification verification = new Verification();
+                comboBox.getItems().addAll(verification.readSpeData("nomDemi", "groupe"));
+                box6.getChildren().addAll(comboBox);
+            }
+        });
 
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -107,14 +117,14 @@ public class RegisterInterface extends Stage {
                     System.out.println("Ok");
                     System.out.println(adress.getText());
                         if(buttonProf.isSelected()){
-                            User user = new User(nom2.getText(), prenom2.getText(), adress.getText(), password2.getText(), buttonProf.getText());
+                            User user = new User(nom2.getText(), prenom2.getText(), adress.getText(), password2.getText(), buttonProf.getText(), null);
                             user.insert();
                             Stage enseignantWindow = new EnseignantDashbord(adress.getText());
                             enseignantWindow.show();
                             close();
                         }
                         else if (buttonStudent.isSelected()){
-                            User user = new User(nom2.getText(), prenom2.getText(), adress.getText(), password2.getText(), buttonStudent.getText());
+                            User user = new User(nom2.getText(), prenom2.getText(), adress.getText(), password2.getText(), buttonStudent.getText(), comboBox.getValue().toString());
                             user.insert();
                             Stage etudiantWindow = new EtudiantDashbord(adress.getText());
                             etudiantWindow.show();
