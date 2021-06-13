@@ -69,9 +69,8 @@ public class ReponseQuestion extends Stage {
                         System.out.println("-----------"+note[0] + "/" + Integer.parseInt(printValue[3]));
 
 
-                        //Deleter
 
-                        Stage qcmCreationWindow = new QcmJoin(emailAdress/*, qcmdate + "\n" + moy[0]*/);
+                        Stage qcmCreationWindow = new QcmJoin(emailAdress, null);
                         qcmCreationWindow.show();
                         close();
                     }

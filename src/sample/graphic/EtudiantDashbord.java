@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.bdd.Verification;
@@ -18,9 +19,9 @@ public class EtudiantDashbord extends Stage {
         Verification verif = new Verification();
         this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
         this.setResizable(false);
-        this.initStyle(StageStyle.UTILITY);
+        this.initStyle(StageStyle.DECORATED);
 
-        Scene laScene = new Scene(creerContenu(adressMail, verif),1280, 720);
+        Scene laScene = new Scene(creerContenu(adressMail, verif),720, 480);
         this.setScene(laScene);
     }
 
@@ -28,42 +29,137 @@ public class EtudiantDashbord extends Stage {
 
         VBox layout = new VBox();
 
-        Label connexion = new Label("Bonjour " +  verif.readSpecificRow("firstname", emailAdress) +" "+  verif.readSpecificRow("secondName", emailAdress));
         HBox box1 = new HBox();
         HBox box2 = new HBox();
-        box1.setStyle("-fx-background-color: #00FF00;");
+        VBox Vbox = new VBox();
+        VBox ListeBouton = new VBox();
 
 
-       /* Label email = new Label("email : ");
-        TextField email2 = new TextField();
-        Label password = new Label("Mot de passe: ");
-        PasswordField password2 = new PasswordField();*/
+
 
         Button qcmJoin = new Button("Rejoindre un QCM");
         Button note = new Button("Consulter ses notes");
-        Button setting = new Button("paramètre");
+        Button setting = new Button ("Parametre");
         Button qcmEncour = new Button("QCM EN COUR !!");
+        Button deconexion = new Button ("Se déconnecter");
+
+        qcmJoin.setStyle("-fx-background-color: \n" +
+                "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),\n" +
+                "        linear-gradient(#020b02, #3a3a3a),\n" +
+                "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%),\n" +
+                "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);\n" +
+                "    -fx-background-insets: 0,1,4,5;\n" +
+                "    -fx-background-radius: 9,8,5,4;\n" +
+                "    -fx-padding: 15 30 15 30;\n" +
+                "    -fx-font-family: \"Helvetica\";\n" +
+                "    -fx-font-size: 18px;\n" +
+                "    -fx-font-weight: bold;\n" +
+                "    -fx-text-fill: #333333;\n" +
+                "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
+                "-fx-min-width: 500px");
+
+
+        note.setStyle("-fx-background-color: \n" +
+                "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),\n" +
+                "        linear-gradient(#020b02, #3a3a3a),\n" +
+                "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%),\n" +
+                "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);\n" +
+                "    -fx-background-insets: 0,1,4,5;\n" +
+                "    -fx-background-radius: 9,8,5,4;\n" +
+                "    -fx-padding: 15 30 15 30;\n" +
+                "    -fx-font-family: \"Helvetica\";\n" +
+                "    -fx-font-size: 18px;\n" +
+                "    -fx-font-weight: bold;\n" +
+                "    -fx-text-fill: #333333;\n" +
+                "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
+                "-fx-min-width: 500px");
+
+        setting.setStyle("-fx-background-color: \n" +
+                "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),\n" +
+                "        linear-gradient(#020b02, #3a3a3a),\n" +
+                "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%),\n" +
+                "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);\n" +
+                "    -fx-background-insets: 0,1,4,5;\n" +
+                "    -fx-background-radius: 9,8,5,4;\n" +
+                "    -fx-padding: 15 30 15 30;\n" +
+                "    -fx-font-family: \"Helvetica\";\n" +
+                "    -fx-font-size: 18px;\n" +
+                "    -fx-font-weight: bold;\n" +
+                "    -fx-text-fill: #333333;\n" +
+                "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
+                "-fx-min-width: 500px");
+
+        qcmEncour.setStyle("-fx-background-color: \n" +
+                "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),\n" +
+                "        linear-gradient(#020b02, #3a3a3a),\n" +
+                "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%),\n" +
+                "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);\n" +
+                "    -fx-background-insets: 0,1,4,5;\n" +
+                "    -fx-background-radius: 9,8,5,4;\n" +
+                "    -fx-padding: 15 30 15 30;\n" +
+                "    -fx-font-family: \"Helvetica\";\n" +
+                "    -fx-font-size: 18px;\n" +
+                "    -fx-font-weight: bold;\n" +
+                "    -fx-text-fill: #333333;\n" +
+                "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
+                "-fx-min-width: 500px");
+
+        deconexion.setStyle("-fx-background-color: \n" +
+                "        linear-gradient(#686868 0%, #232723 25%, #373837 75%, #757575 100%),\n" +
+                "        linear-gradient(#020b02, #3a3a3a),\n" +
+                "        linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%),\n" +
+                "        linear-gradient(#f5f5f5 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);\n" +
+                "    -fx-background-insets: 0,1,4,5;\n" +
+                "    -fx-background-radius: 9,8,5,4;\n" +
+                "    -fx-padding: 15 30 15 30;\n" +
+                "    -fx-font-family: \"Helvetica\";\n" +
+                "    -fx-font-size: 18px;\n" +
+                "    -fx-font-weight: bold;\n" +
+                "    -fx-text-fill: #333333;\n" +
+                "    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);" +
+                "-fx-min-width: 500px");
+
+
+        Label Title = new Label("Accueil : " + "Bonjour " +  verif.readSpecificRow("firstname", emailAdress) +" "+  verif.readSpecificRow("secondName", emailAdress));
+        Title.setPadding(new Insets(20, 0,20,200));
+        Title.setStyle("-fx-font-weight: bold;");
+        Title.setFont(Font.font ("Verdana", 20));
+
+        Vbox.setStyle("-fx-background-color: #FE4E28;-fx-min-height: 500px");
+        box1.setStyle("-fx-background-color: #FE4E28;");
+        box2.setStyle("-fx-background-color: #FE4E28;");
+
+        box1.setStyle("-fx-background-color: #FE4E28;");
 
 
         Insets margin = new Insets(10);
 
-        connexion.setPadding(margin);
         box1.setPadding(margin);
         box2.setPadding(margin);
+        ListeBouton.setPadding(new Insets(0,0,0,100));
 
         qcmJoin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Stage qcmCreationWindow = new QcmJoin(emailAdress);
+                Stage qcmCreationWindow = new QcmJoin(emailAdress, null);
                 qcmCreationWindow.show();
                 close();
             }
         });
 
-
-        layout.getChildren().addAll(connexion, box1, box2);
-        box1.getChildren().addAll(qcmJoin, note);
-        box2.getChildren().addAll(setting, qcmEncour);
+        deconexion.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage Logout = new LoginInterface();
+                Logout.show();
+                close();
+            }
+        });
+        Vbox.getChildren().addAll();
+        ListeBouton.getChildren().addAll(qcmJoin,note,qcmEncour, setting,deconexion);
+        layout.getChildren().addAll(box1, box2);
+        box1.getChildren().addAll(Title);
+        box2.getChildren().addAll(Vbox, ListeBouton);
 
         return layout;
     }

@@ -6,14 +6,14 @@ import sample.graphic.QcmJoin;
 
 public class Main extends Application {
 
-    /*public void start(Stage primaryStage){
-        primaryStage = new CreationQcm("bastien@gmail.com");
+   /* public void start(Stage primaryStage){
+        primaryStage = new LoginInterface();
         //primaryStage = new EtudiantDashbord("bastientalec@orange.fr");
         primaryStage.show();
     }*/
 
     public void start(Stage primaryStage){
-        primaryStage = new QcmJoin("bastientalec@orange.fr");
+        primaryStage = new QcmJoin("bastient@gmail.com", null);
         primaryStage.show();
     }
 

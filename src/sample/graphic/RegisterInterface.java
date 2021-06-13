@@ -15,9 +15,9 @@ import sample.bdd.Verification;
 
 public class RegisterInterface extends Stage {
     public RegisterInterface() {
-        this.setTitle("Vive l'IHM V2");
+        this.setTitle("Inscription");
         this.setResizable(false);
-        this.initStyle(StageStyle.UTILITY);
+        this.initStyle(StageStyle.DECORATED);
 
         Scene registerScene = new Scene(creerContenu(),300, 300);
         this.setScene(registerScene);
@@ -35,6 +35,8 @@ public class RegisterInterface extends Stage {
         HBox box5 = new HBox();
         HBox box6 = new HBox();
         HBox box7 = new HBox();
+
+        layout.setStyle("-fx-background-color: #FE4E28;");
 
 
         Label nom = new Label("Nom : ");
@@ -71,6 +73,10 @@ public class RegisterInterface extends Stage {
         box1.setPadding(margin);
         box2.setPadding(margin);
         box3.setPadding(margin);
+        box4.setPadding(margin);
+        box5.setPadding(margin);
+        box6.setPadding(margin);
+        box7.setPadding(margin);
 
 
         layout.getChildren().addAll(connexion, box1, box2, box3, box4, box5, box6, box7);
@@ -79,7 +85,7 @@ public class RegisterInterface extends Stage {
         box3.getChildren().addAll(adressMail, adress);
         box4.getChildren().addAll(password, password2);
         box5.getChildren().addAll(label, buttonStudent, buttonProf);
-        box7.getChildren().addAll(login, ok, undo);
+        box7.getChildren().addAll(ok, login, undo);
 
         buttonStudent.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -135,6 +141,13 @@ public class RegisterInterface extends Stage {
                             System.out.println("Status no");
                         }
                 }
+            }
+        });
+
+        undo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                close();
             }
         });
 

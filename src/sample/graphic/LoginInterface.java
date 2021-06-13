@@ -11,15 +11,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sample.bdd.Verification;
 
 public class LoginInterface extends Stage {
     public LoginInterface() {
-        this.setTitle("Vive l'IHM V2");
+        this.setTitle("Connexion");
         this.setResizable(false);
-        this.initStyle(StageStyle.UTILITY);
+        this.initStyle(StageStyle.DECORATED);
 
         Scene laScene = new Scene(creerContenu(),250, 250);
         this.setScene(laScene);
@@ -33,16 +34,29 @@ public class LoginInterface extends Stage {
         HBox box1 = new HBox();
         HBox box2 = new HBox();
         HBox box3 = new HBox();
+        connexion.setFont(Font.font ("Verdana", 16));
+        box1.setStyle("-fx-background-color: #FE4E28;");
+        box2.setStyle("-fx-background-color: #FE4E28;");
+        box3.setStyle("-fx-background-color: #FE4E28;");
+        layout.setStyle("-fx-background-color: #FE4E28;");
+
 
 
         Label email = new Label("email : ");
+        email.setFont(Font.font ("Verdana", 12));
         TextField email2 = new TextField();
         Label password = new Label("Mot de passe: ");
+        password.setFont(Font.font ("Verdana", 12));
         PasswordField password2 = new PasswordField();
 
         Button undo = new Button("Annuler");
-        Button ok = new Button("Ok");
-        Button register = new Button("register");
+        Button ok = new Button("Valider");
+        Button register = new Button("Inscription");
+
+        //undo.setStyle("-fx-background-color: #D40000; -fx-text-fill: white;-fx-min-width: 70px;-fx-font-weight: bold;-fx-min-height: 50px;");
+        //ok.setStyle("-fx-background-color: #D40000; -fx-text-fill: white;-fx-min-width: 70px;-fx-font-weight: bold;-fx-min-height: 50px;");
+        //register.setStyle("-fx-background-color: #D40000; -fx-text-fill: white;-fx-min-width: 70px;-fx-font-weight: bold;-fx-min-height: 50px;");
+
 
         undo.setPrefWidth(80);
         ok.setPrefWidth(80);
@@ -60,7 +74,7 @@ public class LoginInterface extends Stage {
         layout.getChildren().addAll(connexion, box1, box2, box3);
         box1.getChildren().addAll(email, email2);
         box2.getChildren().addAll(password, password2);
-        box3.getChildren().addAll(ok, undo, register);
+        box3.getChildren().addAll(ok, register, undo);
 
         register.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -106,6 +120,13 @@ public class LoginInterface extends Stage {
 
 
 
+            }
+        });
+
+        undo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                close();
             }
         });
 
