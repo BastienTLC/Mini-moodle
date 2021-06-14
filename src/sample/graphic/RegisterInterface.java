@@ -19,7 +19,7 @@ public class RegisterInterface extends Stage {
         this.setResizable(false);
         this.initStyle(StageStyle.DECORATED);
 
-        Scene registerScene = new Scene(creerContenu(),300, 300);
+        Scene registerScene = new Scene(creerContenu(),300, 330);
         this.setScene(registerScene);
     }
 
@@ -48,7 +48,7 @@ public class RegisterInterface extends Stage {
         Label password = new Label("Mot de passe: ");
         PasswordField password2 = new PasswordField();
 
-        Label label = new Label("Votre statu");
+        Label label = new Label("Votre statut");
         ToggleGroup group = new ToggleGroup();
         RadioButton buttonStudent = new RadioButton("etudiant");
         buttonStudent.setToggleGroup(group);
@@ -94,6 +94,12 @@ public class RegisterInterface extends Stage {
                 Verification verification = new Verification();
                 comboBox.getItems().addAll(verification.readSpeData("nomDemi", "groupe"));
                 box6.getChildren().addAll(comboBox);
+            }
+        });
+        buttonProf.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                box6.getChildren().setAll();
             }
         });
 

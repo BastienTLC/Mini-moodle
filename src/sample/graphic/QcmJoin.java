@@ -22,7 +22,7 @@ import java.util.Optional;
 public class QcmJoin extends Stage {
     public QcmJoin(String adressMail, String valeur) {
         Verification verif = new Verification();
-        this.setTitle("Liste QCM : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
+        this.setTitle("Dashbord : "+ verif.readSpecificRow("firstname", adressMail) +" "+  verif.readSpecificRow("secondName", adressMail));
         this.setResizable(false);
         this.initStyle(StageStyle.DECORATED);
 
@@ -127,7 +127,7 @@ public class QcmJoin extends Stage {
         box2.setPadding(new Insets(0,0,50,0));
         Vbox.setPadding(new Insets(0,40,50,10));
 
-
+        Vbox.getChildren().addAll();
         layout.getChildren().addAll(box1, box2, Vbox);
         Vbox.getChildren().addAll(setting, returneHome, deconexion);
         ListeQCM.getChildren().addAll(rowQCM);

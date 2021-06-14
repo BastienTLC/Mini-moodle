@@ -2,20 +2,20 @@ package sample;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import sample.graphic.QcmJoin;
+import sample.graphic.LoginInterface;
 
 public class Main extends Application {
 
-   /* public void start(Stage primaryStage){
-        primaryStage = new LoginInterface();
-        //primaryStage = new EtudiantDashbord("bastientalec@orange.fr");
-        primaryStage.show();
-    }*/
-
     public void start(Stage primaryStage){
-        primaryStage = new QcmJoin("bastient@gmail.com", null);
+        primaryStage = new LoginInterface();
+        //primaryStage = new CreationQuestion("leculchris@gmail.com", "455","546",2);
         primaryStage.show();
     }
+
+    /*public void start(Stage primaryStage){
+        primaryStage = new QcmJoin("bastient@gmail.com", null);
+        primaryStage.show();
+    }*/
 
    /* public void start(Stage stage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));

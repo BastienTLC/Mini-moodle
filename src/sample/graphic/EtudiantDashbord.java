@@ -40,7 +40,7 @@ public class EtudiantDashbord extends Stage {
         Button qcmJoin = new Button("Rejoindre un QCM");
         Button note = new Button("Consulter ses notes");
         Button setting = new Button ("Parametre");
-        Button qcmEncour = new Button("QCM EN COUR !!");
+        Button qcmEncour = new Button("QCM en cours");
         Button deconexion = new Button ("Se déconnecter");
 
         qcmJoin.setStyle("-fx-background-color: \n" +
